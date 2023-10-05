@@ -30,18 +30,23 @@ extension Submesh {
 }
 
 private extension Submesh.Textures {
-    
     init(material: MDLMaterial?) {
         func property(with semantic: MDLMaterialSemantic) -> MTLTexture? { // looks up the provided property in the submesh's material, finds the filename string value of the property and returns a texture if there is one
             guard let property = material?.property(with: semantic),
                   property.type == .string,
                   let filename = property.stringValue,
                   let texture = TextureController.texture(filename: filename)
-            else { return nil }
-            
-            
+            else {
+                if let property = material?.property(with: semantic),
+                   property.type == .texture,
+                   let mdlTexture = property.textureSamplerValue?.texture {
+                    return try? TextureController.loadTexture(texture: mdlTexture)
+                }
+                return nil
+            }
             return texture
         }
+        
         baseColor = property(with: MDLMaterialSemantic.baseColor)
         normal = property(with: .tangentSpaceNormal)
         roughness = property(with: .roughness)

@@ -5,13 +5,15 @@ class Model: Transformable {
     let meshes: [Mesh]
     let name: String
     var tiling: UInt32 = 1
+    let objectId: UInt32
     
-    init(device: MTLDevice, name: String) {
+    init(device: MTLDevice, name: String, objectId: UInt32 = 0) {
         guard let assetURL = Bundle.main.url(
             forResource: name,
             withExtension: nil) else {
             fatalError("Model: \(name) not found")
         }
+        self.objectId = objectId
         let allocator = MTKMeshBufferAllocator(device: device)
         let meshDescriptor = MDLVertexDescriptor.defaultLayout
         let asset = MDLAsset(
@@ -19,6 +21,7 @@ class Model: Transformable {
             vertexDescriptor: meshDescriptor,
             bufferAllocator: allocator
         )
+        asset.loadTextures()
 //        let (mdlMeshes, mtkMeshes) = try! MTKMesh.newMeshes(asset: asset, device: device)
         // loading MDLMesh first and changing them before initializing the MTKMesh.
         // This code generateds and loads the vertex tangent and bitangent values.
@@ -51,6 +54,7 @@ extension Model {
         
         var params = fragment
         params.tiling = tiling
+        params.objectId = objectId
         
         encoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: UniformsBuffer.index)
         encoder.setFragmentBytes(&params, length: MemoryLayout<Params>.stride, index: ParamsBuffer.index)

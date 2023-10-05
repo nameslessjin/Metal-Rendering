@@ -48,7 +48,7 @@ struct ArcballCamera: Camera {
     let minDistance: Float = 0.0
     let maxDistance: Float = 50
     var target: float3 = [0, 0, 0]
-    var distance: Float = 20.0
+    var distance: Float = 2.5
     
     var projectionMatrix: float4x4 {
         float4x4(

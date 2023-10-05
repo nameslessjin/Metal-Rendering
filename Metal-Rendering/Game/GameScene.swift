@@ -1,13 +1,27 @@
 import MetalKit
 
 struct GameScene {
-    lazy var cottage: Model = {
-        Model(device: Renderer.device, name: "helmet.obj")
+    static var objectId: UInt32 = 1;
+    
+    lazy var train: Model = {
+        createModel(name: "train.obj")
+    }()
+    lazy var treefir1: Model = {
+        createModel(name: "treefir.obj")
+    }()
+    lazy var treefir2: Model = {
+        createModel(name: "treefir.obj")
+    }()
+    lazy var treefir3: Model = {
+        createModel(name: "treefir.obj")
+    }()
+    lazy var ground: Model = {
+        Model(device: Renderer.device, name: "large_plane.obj", objectId: 0)
     }()
     
-    lazy var gizmo: Model = {
-        Model(device: Renderer.device, name: "gizmo.usd")
-    }()
+//    lazy var gizmo: Model = {
+//        Model(device: Renderer.device, name: "gizmo.usd")
+//    }()
 
     var models: [Model] = []
     
@@ -18,8 +32,8 @@ struct GameScene {
     
     var defaultView: Transform {
         Transform(
-            position: [4.6 , 2.3, -3.84],
-            rotation: [-0.05, 11.7, 0.0]
+            position: [3.2 , 3.1, 1.0],
+            rotation: [-0.6, 10.7, 0.0]
         )
     }
     
@@ -27,13 +41,17 @@ struct GameScene {
     
     init() {
         
-        models = [cottage, gizmo]
+        models = [treefir1, treefir2, treefir3, train, ground]
+        treefir1.position = [-1, 0, 2.5]
+        treefir2.position = [-3, 0, -2]
+        treefir3.position = [ 1.5, 0, -0.5]
+        
+        
         camera.transform = defaultView
         
         // ArcballCaera
-        camera.distance = 3.5
-        camera.target = .zero
-        
+        camera.distance = 4.0
+        camera.target = [0, 1, 0]
         // digital emily
 //        camera.distance = 30
 //        camera.rotation = .zero
@@ -42,6 +60,12 @@ struct GameScene {
         // OrhographicsCamera
 //        camera.position = [0, 2, 0]
 //        camera.rotation.x = .pi / 2
+    }
+    
+    func createModel(name: String) -> Model {
+        let model = Model(device: Renderer.device, name: name, objectId: Self.objectId)
+        Self.objectId += 1
+        return model
     }
     
     mutating func update(size: CGSize) {
@@ -71,13 +95,13 @@ struct GameScene {
             return [lookat.columns.0.x, lookat.columns.1.x, lookat.columns.2.x]
         }
         
-        let heightNear = 2 * tan(camera.fov / 2) * camera.near
-        let widthNear = heightNear * camera.aspect
-        let cameraNear = camera.position + forwardVector * camera.near
-        let cameraUp = float3(0, 1, 0)
-        let bottomLeft = cameraNear - (cameraUp * (heightNear / 2)) - (rightVector * (widthNear / 2))
-        gizmo.position = bottomLeft
-        gizmo.position = (forwardVector - rightVector) * 10
+//        let heightNear = 2 * tan(camera.fov / 2) * camera.near
+//        let widthNear = heightNear * camera.aspect
+//        let cameraNear = camera.position + forwardVector * camera.near
+//        let cameraUp = float3(0, 1, 0)
+//        let bottomLeft = cameraNear - (cameraUp * (heightNear / 2)) - (rightVector * (widthNear / 2))
+//        gizmo.position = bottomLeft
+//        gizmo.position = (forwardVector - rightVector) * 10
 
     }
 }

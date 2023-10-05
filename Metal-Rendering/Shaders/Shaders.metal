@@ -9,26 +9,7 @@
 using namespace metal;
 #import "Common.h"
 #import "Lighting.h"
-
-
-struct VertexIn {
-    float4 position [[attribute(Position)]];
-    float3 normal [[attribute(Normal)]];
-    float2 uv [[attribute(UV)]];
-    float3 color [[attribute(Color)]];
-    float3 tangent [[attribute((Tangent))]];
-    float3 bitangent [[attribute((Bitangent))]];
-};
-
-struct VertexOut {
-    float4 position [[position]];
-    float2 uv;
-    float3 color;
-    float3 worldPosition;
-    float3 worldNormal;
-    float3 worldTangent;
-    float3 worldBitangent;
-};
+#import "Vertex.h"
 
 vertex VertexOut vertex_main(const VertexIn in [[stage_in]], constant Uniforms &uniforms [[buffer(UniformsBuffer)]]) {
     float4 position = uniforms.projectionMatrix * uniforms.viewMatrix * uniforms.modelMatrix * in.position;
@@ -44,7 +25,7 @@ vertex VertexOut vertex_main(const VertexIn in [[stage_in]], constant Uniforms &
     return out;
 }
 
-fragment float4 fragment_main(VertexOut in [[stage_in]], constant Params &params [[buffer(ParamsBuffer)]], texture2d<float> baseColorTexture [[texture(BaseColor)]], constant Light *lights [[buffer(LightBuffer)]], texture2d<float> normalTexture [[texture(NormalTexture)]], constant Material &_material [[buffer(MaterialBuffer)]]) {
+fragment float4 fragment_main(VertexOut in [[stage_in]], constant Params &params [[buffer(ParamsBuffer)]], constant Light *lights [[buffer(LightBuffer)]], constant Material &_material [[buffer(MaterialBuffer)]], texture2d<float> baseColorTexture [[texture(BaseColor)]], texture2d<float> normalTexture [[texture(NormalTexture)]]) {
     
     Material material = _material;
     
@@ -62,7 +43,6 @@ fragment float4 fragment_main(VertexOut in [[stage_in]], constant Params &params
         normal = float3x3(in.worldTangent, in.worldBitangent, in.worldNormal) * normal;
     }
     normal = normalize(normal);
-    
     
     float3 color = phongLighting(normal, in.worldPosition, params, lights, material);
     return float4(color, 1);

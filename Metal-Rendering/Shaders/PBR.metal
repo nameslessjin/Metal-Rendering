@@ -8,22 +8,14 @@
 #include <metal_stdlib>
 using namespace metal;
 
+#import "Vertex.h"
 
 #import "Common.h"
 
 constant float pi = 3.1415926535897932384626433832795;
 
-struct VertexOut {
-    float4 position [[position]];
-    float2 uv;
-    float3 color;
-    float3 worldPosition;
-    float3 worldNormal;
-    float3 worldTangent;
-    float3 worldBitangent;
-};
 
-// functions
+// forward declaration
 float3 computeSpecular(float3 normal, float3 viewDIrection, float3 lightDirection, float roughness, float3 F0);
 
 float3 computeDiffuse(Material material, float3 normal, float3 lightDirection);
@@ -70,14 +62,19 @@ fragment float4 fragment_PBR(
     normal = normalize(normal);
     
     float3 viewDirection = normalize(params.cameraPosition);
-    Light light = lights[0];
-    float3 lightDirection = normalize(light.position);
-    // use metallic to interpolate between 0.04 and material.baseColor
-    float3 F0 = mix(0.04, material.baseColor, material.metallic);
+    float3 specularColor = 0;
+    float3 diffuseColor = 0;
     
-    float3 specularColor = computeSpecular(normal, viewDirection, lightDirection, material.roughness, F0);
-    float3 diffuseColor = computeDiffuse(material, normal, lightDirection);
-    
+    for (uint i = 0; i < params.lightCount; i++) {
+        Light light = lights[i];
+        float3 lightDirection = normalize(light.position);
+        // use metallic to interpolate between 0.04 and material.baseColor
+        float3 F0 = mix(0.04, material.baseColor, material.metallic);
+        
+        specularColor += saturate(computeSpecular(normal, viewDirection, lightDirection, material.roughness, F0));
+        diffuseColor += saturate(computeDiffuse(material, normal, lightDirection) * light.color);
+    }
+
     return float4(diffuseColor + specularColor, 1);
 }
 
@@ -91,7 +88,6 @@ float G1V(float nDotV, float k)
 // AUTHOR John Hable.  Released into the public domain
 float3 computeSpecular(float3 normal, float3 viewDirection, float3 lightDirection, float roughness, float3 F0) {
     float alpha = roughness * roughness;
-    float alphaSqr = alpha * alpha;
     float3 halfVector = normalize(viewDirection + lightDirection);
     float nDotL = saturate(dot(normal, lightDirection));
     float nDotV = saturate(dot(normal, viewDirection));
@@ -102,6 +98,7 @@ float3 computeSpecular(float3 normal, float3 viewDirection, float3 lightDirectio
     float D, vis;
     
     // Distribution
+    float alphaSqr = alpha * alpha;
     float denom = nDotH * nDotH * (alphaSqr - 1.0) + 1.0f;
     D = alphaSqr / (pi * denom * denom);
     

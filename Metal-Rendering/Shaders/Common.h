@@ -23,6 +23,9 @@ typedef struct {
     uint tiling;
     uint lightCount;
     vector_float3 cameraPosition;
+    uint objectId;
+    uint touchX;
+    uint touchY;
 } Params;
 
 typedef enum {
@@ -67,10 +70,10 @@ typedef struct {
     vector_float3 position;
     vector_float3 color;
     vector_float3 specularColor;
-    float radius;
     vector_float3 attenuation;
-    float coneAngle;
     vector_float3 coneDirection;
+    float radius;
+    float coneAngle;
     float coneAttenuation;
 } Light;
 
