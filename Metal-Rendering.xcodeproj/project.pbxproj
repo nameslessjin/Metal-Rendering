@@ -61,6 +61,9 @@
 		4AA6763B2ACE5C44009510E1 /* large_plane.obj in Resources */ = {isa = PBXBuildFile; fileRef = 4AA676352ACE5C43009510E1 /* large_plane.obj */; };
 		4AA6763E2ACE5C92009510E1 /* ForwardRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6763D2ACE5C92009510E1 /* ForwardRenderPass.swift */; };
 		4AA676402ACE6233009510E1 /* Pipelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6763F2ACE6233009510E1 /* Pipelines.swift */; };
+		4AA676462ACEA48F009510E1 /* RenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA676452ACEA48F009510E1 /* RenderPass.swift */; };
+		4AA676482ACEB410009510E1 /* ObjectIdRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA676472ACEB410009510E1 /* ObjectIdRenderPass.swift */; };
+		4AA6764A2ACEC25C009510E1 /* ObjectId.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4AA676492ACEC25C009510E1 /* ObjectId.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +126,9 @@
 		4AA6763D2ACE5C92009510E1 /* ForwardRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardRenderPass.swift; sourceTree = "<group>"; };
 		4AA6763F2ACE6233009510E1 /* Pipelines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipelines.swift; sourceTree = "<group>"; };
 		4AA676412ACE66F0009510E1 /* Vertex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		4AA676452ACEA48F009510E1 /* RenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderPass.swift; sourceTree = "<group>"; };
+		4AA676472ACEB410009510E1 /* ObjectIdRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectIdRenderPass.swift; sourceTree = "<group>"; };
+		4AA676492ACEC25C009510E1 /* ObjectId.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ObjectId.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +302,7 @@
 				4AA675ED2ACE4DFA009510E1 /* Lighting.h */,
 				4AA675EE2ACE4DFA009510E1 /* Lighting.metal */,
 				4AA676412ACE66F0009510E1 /* Vertex.h */,
+				4AA676492ACEC25C009510E1 /* ObjectId.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -349,6 +356,8 @@
 			children = (
 				4AA6763D2ACE5C92009510E1 /* ForwardRenderPass.swift */,
 				4AA6763F2ACE6233009510E1 /* Pipelines.swift */,
+				4AA676452ACEA48F009510E1 /* RenderPass.swift */,
+				4AA676472ACEB410009510E1 /* ObjectIdRenderPass.swift */,
 			);
 			path = RenderPasses;
 			sourceTree = "<group>";
@@ -452,6 +461,7 @@
 			files = (
 				4AA676222ACE4DFA009510E1 /* Shaders.metal in Sources */,
 				4AA676402ACE6233009510E1 /* Pipelines.swift in Sources */,
+				4AA676482ACEB410009510E1 /* ObjectIdRenderPass.swift in Sources */,
 				4AA6761E2ACE4DFA009510E1 /* Renderer.swift in Sources */,
 				4AA676272ACE4DFA009510E1 /* Mesh.swift in Sources */,
 				4AA6761B2ACE4DFA009510E1 /* GameScene.swift in Sources */,
@@ -464,6 +474,8 @@
 				4AA676212ACE4DFA009510E1 /* DebugLight.swift in Sources */,
 				4AA6762B2ACE4DFA009510E1 /* VertexDescriptor.swift in Sources */,
 				4AA676282ACE4DFA009510E1 /* Model.swift in Sources */,
+				4AA6764A2ACEC25C009510E1 /* ObjectId.metal in Sources */,
+				4AA676462ACEA48F009510E1 /* RenderPass.swift in Sources */,
 				4AA6762A2ACE4DFA009510E1 /* Submesh.swift in Sources */,
 				4AA6762C2ACE4DFA009510E1 /* Options.swift in Sources */,
 				4AA6761A2ACE4DFA009510E1 /* GameController.swift in Sources */,

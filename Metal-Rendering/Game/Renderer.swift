@@ -7,6 +7,7 @@ class Renderer: NSObject {
     var options: Options
     
     var forwardRenderPass: ForwardRenderPass
+    var objectIdRenderPass: ObjectIdRenderPass
     
     var uniforms = Uniforms()
     var params = Params()
@@ -28,6 +29,7 @@ class Renderer: NSObject {
         self.options = options
         
         forwardRenderPass = ForwardRenderPass(view: metalView)
+        objectIdRenderPass = ObjectIdRenderPass()
 
         super.init()
         
@@ -40,6 +42,7 @@ class Renderer: NSObject {
 extension Renderer {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         forwardRenderPass.resize(view: view, size: size)
+        objectIdRenderPass.resize(view: view, size: size)
     }
     
     func updateUniforms(scene: GameScene) {
@@ -58,7 +61,10 @@ extension Renderer {
         
         updateUniforms(scene: scene)
         
+        objectIdRenderPass.draw(commandBuffer: commandBuffer, scene: scene, uniforms: uniforms, params: params)
+        
         forwardRenderPass.descriptor = descriptor
+        forwardRenderPass.idTexture = objectIdRenderPass.idTexture // pass ID texture to the next render pass
         forwardRenderPass.draw(commandBuffer: commandBuffer, scene: scene, uniforms: uniforms, params: params)
 
         

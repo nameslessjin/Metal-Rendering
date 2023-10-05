@@ -54,7 +54,8 @@ typedef enum {
     NormalTexture = 1,
     RoughnessTexture = 2,
     MetallicTexture = 3,
-    AOTexture = 4
+    AOTexture = 4,
+    IDTexure = 11
 } TextureIndices;
 
 typedef enum {

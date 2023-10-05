@@ -16,7 +16,7 @@ constant float pi = 3.1415926535897932384626433832795;
 
 
 // forward declaration
-float3 computeSpecular(float3 normal, float3 viewDIrection, float3 lightDirection, float roughness, float3 F0);
+float3 computeSpecular(float3 normal, float3 viewDirection, float3 lightDirection, float roughness, float3 F0);
 
 float3 computeDiffuse(Material material, float3 normal, float3 lightDirection);
 
@@ -29,7 +29,8 @@ fragment float4 fragment_PBR(
     texture2d<float> normalTexture [[texture(NormalTexture)]],
     texture2d<float> roughnessTexture [[texture(RoughnessTexture)]],
     texture2d<float> metallicTexture [[texture(MetallicTexture)]],
-    texture2d<float> aoTexture [[texture(AOTexture)]]
+    texture2d<float> aoTexture [[texture(AOTexture)]],
+    texture2d<uint> idTexture [[texture(IDTexure)]]
 ) {
     constexpr sampler textureSampler(filter::linear, address::repeat, mip_filter::linear);
     
@@ -39,6 +40,16 @@ fragment float4 fragment_PBR(
     if (!is_null_texture(baseColorTexture)) {
         material.baseColor = baseColorTexture.sample(textureSampler, in.uv * params.tiling).rgb;
     }
+    
+    // check if the touched object is the current object
+    if (!is_null_texture(idTexture)) {
+        uint2 coord = uint2(params.touchX * 2, params.touchY * 2);
+        uint objectID = idTexture.read(coord).r; // read uses pixel coordinates rather than normalized coordinates
+        if (params.objectId != 0 && objectID == params.objectId) {
+            material.baseColor = float3(0.9, 0.5, 0);
+        }
+    }
+    
     // extract roughness
     if (!is_null_texture(roughnessTexture)) {
         material.roughness = roughnessTexture.sample(textureSampler, in.uv).r;
