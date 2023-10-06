@@ -13,6 +13,8 @@
 		4A8339EB2ACFCFEC0047A660 /* ShadowCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8339EA2ACFCFEC0047A660 /* ShadowCamera.swift */; };
 		4A8339ED2ACFE0960047A660 /* DebugCameraFrustum.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4A8339EC2ACFE0960047A660 /* DebugCameraFrustum.metal */; };
 		4A8339EF2ACFE1210047A660 /* DebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8339EE2ACFE1210047A660 /* DebugModel.swift */; };
+		4A8339F12ACFE7320047A660 /* ShadowRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8339F02ACFE7320047A660 /* ShadowRenderPass.swift */; };
+		4A8339F32ACFED220047A660 /* Shadow.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4A8339F22ACFED220047A660 /* Shadow.metal */; };
 		4AA675AA2ACE4DAA009510E1 /* Metal_RenderingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA675A92ACE4DAA009510E1 /* Metal_RenderingApp.swift */; };
 		4AA675AE2ACE4DAB009510E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA675AD2ACE4DAB009510E1 /* Assets.xcassets */; };
 		4AA675B22ACE4DAB009510E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA675B12ACE4DAB009510E1 /* Preview Assets.xcassets */; };
@@ -79,6 +81,8 @@
 		4A8339EA2ACFCFEC0047A660 /* ShadowCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowCamera.swift; sourceTree = "<group>"; };
 		4A8339EC2ACFE0960047A660 /* DebugCameraFrustum.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = DebugCameraFrustum.metal; sourceTree = "<group>"; };
 		4A8339EE2ACFE1210047A660 /* DebugModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugModel.swift; sourceTree = "<group>"; };
+		4A8339F02ACFE7320047A660 /* ShadowRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowRenderPass.swift; sourceTree = "<group>"; };
+		4A8339F22ACFED220047A660 /* Shadow.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shadow.metal; sourceTree = "<group>"; };
 		4AA675A62ACE4DAA009510E1 /* Metal-Rendering.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Metal-Rendering.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AA675A92ACE4DAA009510E1 /* Metal_RenderingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metal_RenderingApp.swift; sourceTree = "<group>"; };
 		4AA675AD2ACE4DAB009510E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -319,6 +323,7 @@
 				4AA675EE2ACE4DFA009510E1 /* Lighting.metal */,
 				4AA676412ACE66F0009510E1 /* Vertex.h */,
 				4AA676492ACEC25C009510E1 /* ObjectId.metal */,
+				4A8339F22ACFED220047A660 /* Shadow.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -376,6 +381,7 @@
 				4AA6763F2ACE6233009510E1 /* Pipelines.swift */,
 				4AA676452ACEA48F009510E1 /* RenderPass.swift */,
 				4AA676472ACEB410009510E1 /* ObjectIdRenderPass.swift */,
+				4A8339F02ACFE7320047A660 /* ShadowRenderPass.swift */,
 			);
 			path = RenderPasses;
 			sourceTree = "<group>";
@@ -507,6 +513,8 @@
 				4AA675FC2ACE4DFA009510E1 /* Movement.swift in Sources */,
 				4AA676202ACE4DFA009510E1 /* MathLib.swift in Sources */,
 				4AA6761D2ACE4DFA009510E1 /* SceneLighting.swift in Sources */,
+				4A8339F12ACFE7320047A660 /* ShadowRenderPass.swift in Sources */,
+				4A8339F32ACFED220047A660 /* Shadow.metal in Sources */,
 				4AA676292ACE4DFA009510E1 /* Transform.swift in Sources */,
 				4AA6763E2ACE5C92009510E1 /* ForwardRenderPass.swift in Sources */,
 				4A8339ED2ACFE0960047A660 /* DebugCameraFrustum.metal in Sources */,

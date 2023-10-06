@@ -14,13 +14,14 @@ using namespace metal;
 vertex VertexOut vertex_main(const VertexIn in [[stage_in]], constant Uniforms &uniforms [[buffer(UniformsBuffer)]]) {
     float4 position = uniforms.projectionMatrix * uniforms.viewMatrix * uniforms.modelMatrix * in.position;
     VertexOut out {
-        .position = position,
+        .position = position, // transformed from camera point of view
         .uv = in.uv,
         .color = in.color,
         .worldPosition = (uniforms.modelMatrix * in.position).xyz,
         .worldNormal = uniforms.normalMatrix * in.normal,
         .worldTangent = uniforms.normalMatrix * in.tangent,
-        .worldBitangent = uniforms.normalMatrix * in.bitangent
+        .worldBitangent = uniforms.normalMatrix * in.bitangent,
+        .shadowPosition = uniforms.shadowProjectionMatrix * uniforms.shadowViewMatrix * uniforms.modelMatrix * in.position // transformed from light point of view
     };
     return out;
 }

@@ -37,4 +37,14 @@ enum PipelineStates {
         return Self.createPSO(descriptor: pipelineDescriptor)
     }
     
+    static func createShadowPSO() -> MTLRenderPipelineState {
+        let vertexFunction = Renderer.library?.makeFunction(name: "vertex_depth")
+        let pipelineDescriptor = MTLRenderPipelineDescriptor()
+        pipelineDescriptor.vertexFunction = vertexFunction
+        pipelineDescriptor.colorAttachments[0].pixelFormat = .invalid // only interested in depth info
+        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
+        pipelineDescriptor.vertexDescriptor = .defaultLayout
+        return createPSO(descriptor: pipelineDescriptor)
+    }
+    
 }

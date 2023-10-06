@@ -57,9 +57,8 @@ struct GameScene {
         treefir2.position = [-3, 0, -2]
         treefir3.position = [ 1.5, 0, -0.5]
         
-        
         camera.transform = defaultView
-        
+        camera.far = 8
         // ArcballCaera
         camera.distance = 4.0
         camera.target = [0, 1, 0]

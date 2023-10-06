@@ -29,7 +29,9 @@ struct ObjectIdRenderPass: RenderPass {
         renderEncoder.setRenderPipelineState(pipelineState)
         renderEncoder.setDepthStencilState(depthStencilState)
         for model in scene.models {
+            renderEncoder.pushDebugGroup(model.name)
             model.render(encoder: renderEncoder, uniforms: uniforms, params: params)
+            renderEncoder.popDebugGroup()
         }
         renderEncoder.endEncoding()
     }

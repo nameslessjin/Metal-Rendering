@@ -15,6 +15,7 @@ struct ForwardRenderPass: RenderPass {
     let depthStencilState: MTLDepthStencilState?
     
     weak var idTexture: MTLTexture?
+    weak var shadowTexture: MTLTexture?
     
     init(view: MTKView) {
         pipelineState = PipelineStates.createForwardPSO(colorPixelFormat: view.colorPixelFormat)
@@ -35,6 +36,7 @@ struct ForwardRenderPass: RenderPass {
         var lights = scene.lighting.lights
         renderEncoder.setFragmentBytes(&lights, length: MemoryLayout<Light>.stride * lights.count, index: LightBuffer.index)
         renderEncoder.setFragmentTexture(idTexture, index: IDTexure.index)
+        renderEncoder.setFragmentTexture(shadowTexture, index: ShadowTexture.index)
         
         // last locatino touched on the metal view
         let input = InputController.shared
@@ -43,6 +45,7 @@ struct ForwardRenderPass: RenderPass {
         params.touchY = UInt32(input.touchLocation?.y ?? 0)
         
         for model in scene.models {
+            renderEncoder.pushDebugGroup(model.name)
             model.render(encoder: renderEncoder, uniforms: uniforms, params: params)
             renderEncoder.popDebugGroup()
         }
@@ -50,6 +53,8 @@ struct ForwardRenderPass: RenderPass {
         // Debugging sun position
         var scene = scene
         DebugModel.debugDrawModel(renderEncoder: renderEncoder, uniforms: uniforms, model: scene.sun, color: [0.9, 0.8, 0.2])
+        DebugLights.draw(lights: scene.lighting.lights, encoder: renderEncoder, uniforms: uniforms)
+        DebugCameraFrustum.draw(encoder: renderEncoder, scene: scene, uniforms: uniforms)
         // end debugging
         renderEncoder.endEncoding()
     }

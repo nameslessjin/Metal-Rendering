@@ -29,7 +29,8 @@ fragment float4 fragment_PBR(
     texture2d<float> roughnessTexture [[texture(RoughnessTexture)]],
     texture2d<float> metallicTexture [[texture(MetallicTexture)]],
     texture2d<float> aoTexture [[texture(AOTexture)]],
-    texture2d<uint> idTexture [[texture(IDTexure)]]
+    texture2d<uint> idTexture [[texture(IDTexure)]],
+    depth2d<float> shadowTexture [[texture(ShadowTexture)]]
 ) {
     constexpr sampler textureSampler(filter::linear, address::repeat, mip_filter::linear);
     
@@ -84,6 +85,26 @@ fragment float4 fragment_PBR(
         specularColor += saturate(computeSpecular(normal, viewDirection, lightDirection, material.roughness, F0));
         diffuseColor += saturate(computeDiffuse(material, normal, lightDirection) * light.color);
     }
+    
+    // shadow calculation
+    // vertex pos from the light.  The GPU performed a perspective divide before writing the fragment to the shadow texure
+    // here we matches the same perspective division so that we can cmpare the current sample's depth value to the one in the shadow texture
+    float3 shadowPosition = in.shadowPosition.xyz / in.shadowPosition.w;
+    // determine the shadow position to serve as a screen space pixel locator on the shadow texture
+    // rescale the coords from [-1, 1] to [0, 1] to match the uv space, reverse Y since is it upside down
+    float2 xy = shadowPosition.xy;
+    xy = xy * 0.5 + 0.5;
+    xy.y = 1 - xy.y;
+    if (xy.x < 0.0 || xy.x > 1.0 || xy.y < 0.0 || xy.y > 1.0) return float4(1, 0, 0, 1);
+    xy = saturate(xy);
+    constexpr sampler s(coord::normalized, filter::linear, address::clamp_to_edge, compare_func::less);
+    float shadow_sample = shadowTexture.sample(s, xy); // depth value for the current pixel
+    // darken the diffuse color for pixels with a depth greather than the shadow value
+    // if shadowPos.z is 0.5 and shadow sample is 0.2 then from the sun, the current fragment shadowPosition.z is further away than the stored fragment
+    // since the sun can't see the fragment, it is blocked, it is in shadow
+    if (shadowPosition.z > shadow_sample + 0.001) diffuseColor *= 0.5;
+    
+    
 
     return float4(diffuseColor + specularColor, 1);
 }

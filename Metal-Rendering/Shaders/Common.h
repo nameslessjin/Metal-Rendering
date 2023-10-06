@@ -15,6 +15,8 @@ typedef struct {
     matrix_float4x4 viewMatrix;
     matrix_float4x4 projectionMatrix;
     matrix_float3x3 normalMatrix; // normal matrix in world space
+    matrix_float4x4 shadowProjectionMatrix;
+    matrix_float4x4 shadowViewMatrix;
 } Uniforms;
 
 typedef struct {
@@ -55,7 +57,8 @@ typedef enum {
     RoughnessTexture = 2,
     MetallicTexture = 3,
     AOTexture = 4,
-    IDTexure = 11
+    IDTexure = 11,
+    ShadowTexture = 15
 } TextureIndices;
 
 typedef enum {
