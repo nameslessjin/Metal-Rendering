@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A8339E52ACFBB2B0047A660 /* sun_sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 4A8339E42ACFBB2B0047A660 /* sun_sphere.obj */; };
+		4A8339E72ACFBB3A0047A660 /* sun_sphere.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 4A8339E62ACFBB3A0047A660 /* sun_sphere.mtl */; };
+		4A8339E92ACFCF2F0047A660 /* DebugCameraFrustum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8339E82ACFCF2F0047A660 /* DebugCameraFrustum.swift */; };
+		4A8339EB2ACFCFEC0047A660 /* ShadowCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8339EA2ACFCFEC0047A660 /* ShadowCamera.swift */; };
+		4A8339ED2ACFE0960047A660 /* DebugCameraFrustum.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4A8339EC2ACFE0960047A660 /* DebugCameraFrustum.metal */; };
+		4A8339EF2ACFE1210047A660 /* DebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8339EE2ACFE1210047A660 /* DebugModel.swift */; };
 		4AA675AA2ACE4DAA009510E1 /* Metal_RenderingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA675A92ACE4DAA009510E1 /* Metal_RenderingApp.swift */; };
 		4AA675AE2ACE4DAB009510E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA675AD2ACE4DAB009510E1 /* Assets.xcassets */; };
 		4AA675B22ACE4DAB009510E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA675B12ACE4DAB009510E1 /* Preview Assets.xcassets */; };
@@ -67,6 +73,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A8339E42ACFBB2B0047A660 /* sun_sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sun_sphere.obj; sourceTree = "<group>"; };
+		4A8339E62ACFBB3A0047A660 /* sun_sphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sun_sphere.mtl; sourceTree = "<group>"; };
+		4A8339E82ACFCF2F0047A660 /* DebugCameraFrustum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugCameraFrustum.swift; sourceTree = "<group>"; };
+		4A8339EA2ACFCFEC0047A660 /* ShadowCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowCamera.swift; sourceTree = "<group>"; };
+		4A8339EC2ACFE0960047A660 /* DebugCameraFrustum.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = DebugCameraFrustum.metal; sourceTree = "<group>"; };
+		4A8339EE2ACFE1210047A660 /* DebugModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugModel.swift; sourceTree = "<group>"; };
 		4AA675A62ACE4DAA009510E1 /* Metal-Rendering.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Metal-Rendering.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AA675A92ACE4DAA009510E1 /* Metal_RenderingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metal_RenderingApp.swift; sourceTree = "<group>"; };
 		4AA675AD2ACE4DAB009510E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -279,6 +291,7 @@
 				4AA675E22ACE4DF9009510E1 /* Camera.swift */,
 				4AA675E32ACE4DF9009510E1 /* SceneLighting.swift */,
 				4AA675E42ACE4DF9009510E1 /* Renderer.swift */,
+				4A8339EA2ACFCFEC0047A660 /* ShadowCamera.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -289,6 +302,9 @@
 				4AA675E62ACE4DF9009510E1 /* DebugLights.metal */,
 				4AA675E72ACE4DF9009510E1 /* MathLib.swift */,
 				4AA675E82ACE4DF9009510E1 /* DebugLight.swift */,
+				4A8339E82ACFCF2F0047A660 /* DebugCameraFrustum.swift */,
+				4A8339EC2ACFE0960047A660 /* DebugCameraFrustum.metal */,
+				4A8339EE2ACFE1210047A660 /* DebugModel.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -342,8 +358,10 @@
 			isa = PBXGroup;
 			children = (
 				4AA676302ACE5C43009510E1 /* large_plane.mtl */,
+				4A8339E42ACFBB2B0047A660 /* sun_sphere.obj */,
 				4AA676312ACE5C43009510E1 /* treefir.mtl */,
 				4AA676322ACE5C43009510E1 /* train.obj */,
+				4A8339E62ACFBB3A0047A660 /* sun_sphere.mtl */,
 				4AA676332ACE5C43009510E1 /* treefir.obj */,
 				4AA676342ACE5C43009510E1 /* train.mtl */,
 				4AA676352ACE5C43009510E1 /* large_plane.obj */,
@@ -441,6 +459,7 @@
 				4AA676082ACE4DFA009510E1 /* fourareen.mtl in Resources */,
 				4AA6760C2ACE4DFA009510E1 /* cottage2.obj in Resources */,
 				4AA675FE2ACE4DFA009510E1 /* helmet.mtl in Resources */,
+				4A8339E52ACFBB2B0047A660 /* sun_sphere.obj in Resources */,
 				4AA676052ACE4DFA009510E1 /* license.txt in Resources */,
 				4AA676002ACE4DFA009510E1 /* helmet-normal.png in Resources */,
 				4AA6763A2ACE5C44009510E1 /* train.mtl in Resources */,
@@ -449,6 +468,7 @@
 				4AA6760F2ACE4DFA009510E1 /* gizmo.usd in Resources */,
 				4AA675AE2ACE4DAB009510E1 /* Assets.xcassets in Resources */,
 				4AA6760E2ACE4DFA009510E1 /* cube.mtl in Resources */,
+				4A8339E72ACFBB3A0047A660 /* sun_sphere.mtl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,7 +480,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AA676222ACE4DFA009510E1 /* Shaders.metal in Sources */,
+				4A8339E92ACFCF2F0047A660 /* DebugCameraFrustum.swift in Sources */,
 				4AA676402ACE6233009510E1 /* Pipelines.swift in Sources */,
+				4A8339EF2ACFE1210047A660 /* DebugModel.swift in Sources */,
 				4AA676482ACEB410009510E1 /* ObjectIdRenderPass.swift in Sources */,
 				4AA6761E2ACE4DFA009510E1 /* Renderer.swift in Sources */,
 				4AA676272ACE4DFA009510E1 /* Mesh.swift in Sources */,
@@ -476,6 +498,7 @@
 				4AA676282ACE4DFA009510E1 /* Model.swift in Sources */,
 				4AA6764A2ACEC25C009510E1 /* ObjectId.metal in Sources */,
 				4AA676462ACEA48F009510E1 /* RenderPass.swift in Sources */,
+				4A8339EB2ACFCFEC0047A660 /* ShadowCamera.swift in Sources */,
 				4AA6762A2ACE4DFA009510E1 /* Submesh.swift in Sources */,
 				4AA6762C2ACE4DFA009510E1 /* Options.swift in Sources */,
 				4AA6761A2ACE4DFA009510E1 /* GameController.swift in Sources */,
@@ -486,6 +509,7 @@
 				4AA6761D2ACE4DFA009510E1 /* SceneLighting.swift in Sources */,
 				4AA676292ACE4DFA009510E1 /* Transform.swift in Sources */,
 				4AA6763E2ACE5C92009510E1 /* ForwardRenderPass.swift in Sources */,
+				4A8339ED2ACFE0960047A660 /* DebugCameraFrustum.metal in Sources */,
 				4AA675AA2ACE4DAA009510E1 /* Metal_RenderingApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

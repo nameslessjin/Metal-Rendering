@@ -26,7 +26,7 @@ struct ForwardRenderPass: RenderPass {
     
     func draw(commandBuffer: MTLCommandBuffer, scene: GameScene, uniforms: Uniforms, params: Params) {
         guard let descriptor = descriptor,
-              let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor) else {return}
+              let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor) else { return }
         
         renderEncoder.label = label
         renderEncoder.setDepthStencilState(depthStencilState)
@@ -44,7 +44,13 @@ struct ForwardRenderPass: RenderPass {
         
         for model in scene.models {
             model.render(encoder: renderEncoder, uniforms: uniforms, params: params)
+            renderEncoder.popDebugGroup()
         }
+        
+        // Debugging sun position
+        var scene = scene
+        DebugModel.debugDrawModel(renderEncoder: renderEncoder, uniforms: uniforms, model: scene.sun, color: [0.9, 0.8, 0.2])
+        // end debugging
         renderEncoder.endEncoding()
     }
 }

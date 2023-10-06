@@ -17,7 +17,6 @@ constant float pi = 3.1415926535897932384626433832795;
 
 // forward declaration
 float3 computeSpecular(float3 normal, float3 viewDirection, float3 lightDirection, float roughness, float3 F0);
-
 float3 computeDiffuse(Material material, float3 normal, float3 lightDirection);
 
 fragment float4 fragment_PBR(

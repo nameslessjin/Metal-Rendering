@@ -3,8 +3,8 @@ struct SceneLighting {
     static func buildDefaultLight() -> Light {
         var light = Light()
         light.position = [0, 0, 0]
-        light.color = [1, 1, 1]
-        light.specularColor = [0.6, 0.6, 0.6]
+        light.color = float3(repeating: 1.0)
+        light.specularColor = float3(repeating: 0.6)
         light.attenuation = [1, 0, 0]
         light.type = Sun
         return light
@@ -13,6 +13,7 @@ struct SceneLighting {
     let sunlight: Light = {
         var light = Self.buildDefaultLight()
         light.position = [3, 3, -2]
+        light.color = float3(repeating: 1.0)
         return light
     }()
     
@@ -79,7 +80,7 @@ struct SceneLighting {
     
     init() {
         lights.append(sunlight)
-        lights.append(fillLight)
+//        lights.append(fillLight)
 //        lights.append(ambientLight)
 //        lights.append(redLight)
 //        lights.append(spotLight)

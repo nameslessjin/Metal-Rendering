@@ -108,6 +108,7 @@ struct OrthographicCamera: Camera, Movement {
     var viewSize: CGFloat = 10 // the unit size of the scene
     var near: Float = 0.1
     var far: Float = 100
+    var center = float3.zero
     
     var viewMatrix: float4x4 {
         (float4x4(translation: position) * float4x4(rotation: rotation)).inverse

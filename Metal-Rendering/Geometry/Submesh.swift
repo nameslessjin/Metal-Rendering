@@ -79,10 +79,10 @@ private extension Material {
            metallic.type == .float3 {
             self.metallic = metallic.floatValue
         }
+        self.ambientOcclusion = 1
         if let ambientOcclusion = material?.property(with: .ambientOcclusion),
            ambientOcclusion.type == .float3 {
             self.ambientOcclusion = ambientOcclusion.floatValue
         }
-        self.ambientOcclusion = 1
     }
 }

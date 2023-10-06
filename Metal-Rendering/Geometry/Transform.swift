@@ -38,6 +38,6 @@ extension Transformable {
     }
     var scale: Float {
         get { transform.scale }
-        set {transform.scale = newValue}
+        set { transform.scale = newValue }
     }
 }

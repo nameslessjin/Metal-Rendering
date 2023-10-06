@@ -14,6 +14,7 @@ struct VertexOut {
     float point_size [[point_size]];
 };
 
+
 vertex VertexOut vertex_debug(constant float3 *vertices [[buffer(0)]], constant Uniforms &uniforms [[buffer(UniformsBuffer)]], uint id [[vertex_id]]) {
     matrix_float4x4 mvp = uniforms.projectionMatrix * uniforms.viewMatrix * uniforms.modelMatrix;
     VertexOut out {
