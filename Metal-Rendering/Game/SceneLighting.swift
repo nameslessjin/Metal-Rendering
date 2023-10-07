@@ -1,3 +1,5 @@
+import MetalKit
+
 struct SceneLighting {
     
     static func buildDefaultLight() -> Light {
@@ -26,7 +28,7 @@ struct SceneLighting {
     
     let ambientLight: Light = {
         var light = Self.buildDefaultLight()
-        light.color = [0.05, 0.2, 0]
+        light.color = float3(repeating: 0.1)
         light.type = Ambient
         return light
     }()
@@ -77,16 +79,51 @@ struct SceneLighting {
     }()
     
     var lights: [Light] = []
+    var sunlights: [Light]
+    var pointLights: [Light]
+    var lightsBuffer: MTLBuffer
+    var sunBuffer: MTLBuffer
+    var pointBuffer: MTLBuffer
     
     init() {
-        lights.append(sunlight)
-//        lights.append(fillLight)
-//        lights.append(ambientLight)
-//        lights.append(redLight)
-//        lights.append(spotLight)
-//        lights.append(emilyLight1)
-//        lights.append(emilyLight2)
-//        lights.append(emilyLight3)
-//        lights.append(emilyLight4)
+        sunlights = [sunlight, ambientLight]
+        sunBuffer = Self.createBuffer(lights: sunlights)
+        lights = sunlights
+        pointLights = Self.createPointLights(count: 200, min: [-3, 0.1, -3], max: [3, 0.3, 3])
+        pointBuffer = Self.createBuffer(lights: pointLights)
+        lights += pointLights
+        lightsBuffer = Self.createBuffer(lights: lights)
+    }
+    
+    static func createBuffer(lights: [Light]) -> MTLBuffer {
+        var lights = lights
+        return Renderer.device.makeBuffer(bytes: &lights, length: MemoryLayout<Light>.stride * lights.count, options: [])!
+    }
+    
+    static func createPointLights(count: Int, min: float3, max: float3) -> [Light] {
+        let colors: [float3] = [
+            float3(1, 0, 0),
+            float3(1, 1, 0),
+            float3(1, 1, 1),
+            float3(0, 1, 0),
+            float3(0, 1, 1),
+            float3(0, 0, 1),
+            float3(0, 1, 1),
+            float3(1, 0, 1)
+        ]
+        
+        var lights: [Light] = []
+        for _ in 0..<count {
+            var light = Self.buildDefaultLight()
+            light.type = Point
+            let x = Float.random(in: min.x...max.x)
+            let y = Float.random(in: min.y...max.y)
+            let z = Float.random(in: min.z...max.z)
+            light.position = [x, y, z]
+            light.color = colors[Int.random(in: 0..<colors.count)]
+            light.attenuation = [0.2, 10, 50]
+            lights.append(light)
+        }
+        return lights
     }
 }

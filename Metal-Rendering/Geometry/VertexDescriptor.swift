@@ -60,3 +60,9 @@ extension TextureIndices {
         return Int(self.rawValue)
     }
 }
+
+extension RenderTargetIndices {
+    var index: Int {
+        return Int(self.rawValue)
+    }
+}

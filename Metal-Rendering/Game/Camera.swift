@@ -98,7 +98,6 @@ struct ArcballCamera: Camera {
         let distanceVector = float4(0, 0, -distance, 0)
         let rotatedVector = rotateMatrix * distanceVector
         position = target + rotatedVector.xyz
-        
     }
 }
 

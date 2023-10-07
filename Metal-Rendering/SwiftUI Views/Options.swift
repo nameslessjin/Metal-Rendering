@@ -8,9 +8,9 @@
 import Foundation
 
 enum RenderChoice {
-    case train, quad
+    case forward, deferred
 }
 
 class Options: ObservableObject {
-    @Published var renderChoice = RenderChoice.quad
+    @Published var renderChoice = RenderChoice.deferred
 }

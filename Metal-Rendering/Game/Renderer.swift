@@ -1,18 +1,21 @@
 import MetalKit
 
 class Renderer: NSObject {
+    // swiftlint:disable implicitly_unwrapped_optional
     static var device: MTLDevice!
     static var commandQueue: MTLCommandQueue!
     static var library: MTLLibrary!
     var options: Options
     
-    var forwardRenderPass: ForwardRenderPass
-    var objectIdRenderPass: ObjectIdRenderPass
-    var shadowRenderPass: ShadowRenderPass
-    
     var uniforms = Uniforms()
     var params = Params()
     var shadowCamera = OrthographicCamera()
+    
+    var forwardRenderPass: ForwardRenderPass
+    var objectIdRenderPass: ObjectIdRenderPass
+    var shadowRenderPass: ShadowRenderPass
+    var gBufferRenderPass: GBufferRenderPass
+    var lightingRenderPass: LightingRenderPass
 
     init(metalView: MTKView, options: Options) {
         guard
@@ -33,7 +36,9 @@ class Renderer: NSObject {
         forwardRenderPass = ForwardRenderPass(view: metalView)
         objectIdRenderPass = ObjectIdRenderPass()
         shadowRenderPass = ShadowRenderPass()
-
+        gBufferRenderPass = GBufferRenderPass(view: metalView)
+        lightingRenderPass = LightingRenderPass(view: metalView)
+        
         super.init()
         
         metalView.clearColor = MTLClearColor(red: 0.93, green: 0.97, blue: 1.0, alpha: 1.0)
@@ -47,6 +52,8 @@ extension Renderer {
         forwardRenderPass.resize(view: view, size: size)
         objectIdRenderPass.resize(view: view, size: size)
         shadowRenderPass.resize(view: view, size: size)
+        gBufferRenderPass.resize(view: view, size: size)
+        lightingRenderPass.resize(view: view, size: size)
     }
     
     func updateUniforms(scene: GameScene) {
@@ -73,10 +80,20 @@ extension Renderer {
         objectIdRenderPass.draw(commandBuffer: commandBuffer, scene: scene, uniforms: uniforms, params: params)
         shadowRenderPass.draw(commandBuffer: commandBuffer, scene: scene, uniforms: uniforms, params: params)
         
-        forwardRenderPass.descriptor = descriptor
-        forwardRenderPass.idTexture = objectIdRenderPass.idTexture // pass ID texture to the main render pass
-        forwardRenderPass.shadowTexture = shadowRenderPass.shadowTexture // pass shadow texture to the main render pass
-        forwardRenderPass.draw(commandBuffer: commandBuffer, scene: scene, uniforms: uniforms, params: params)
+        if options.renderChoice == .deferred {
+            gBufferRenderPass.shadowTexture = shadowRenderPass.shadowTexture
+            gBufferRenderPass.draw(commandBuffer: commandBuffer, scene: scene, uniforms: uniforms, params: params)
+            lightingRenderPass.albedoTexture = gBufferRenderPass.albedoTexture
+            lightingRenderPass.normalTexture = gBufferRenderPass.normalTexture
+            lightingRenderPass.positionTexture = gBufferRenderPass.positionTexture
+            lightingRenderPass.descriptor = descriptor
+            lightingRenderPass.draw(commandBuffer: commandBuffer, scene: scene, uniforms: uniforms, params: params)
+        } else {
+            forwardRenderPass.descriptor = descriptor
+            forwardRenderPass.idTexture = objectIdRenderPass.idTexture // pass ID texture to the main render pass
+            forwardRenderPass.shadowTexture = shadowRenderPass.shadowTexture // pass shadow texture to the main render pass
+            forwardRenderPass.draw(commandBuffer: commandBuffer, scene: scene, uniforms: uniforms, params: params)
+        }
 
         
         // DebugLights.draw(lights: scene.lighting.lights, encoder: renderEncoder, uniforms: uniforms)

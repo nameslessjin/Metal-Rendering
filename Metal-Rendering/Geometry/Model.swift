@@ -7,14 +7,14 @@ class Model: Transformable {
     var tiling: UInt32 = 1
     let objectId: UInt32
     
-    init(device: MTLDevice, name: String, objectId: UInt32 = 0) {
+    init(name: String, objectId: UInt32 = 0) {
         guard let assetURL = Bundle.main.url(
             forResource: name,
             withExtension: nil) else {
             fatalError("Model: \(name) not found")
         }
         self.objectId = objectId
-        let allocator = MTKMeshBufferAllocator(device: device)
+        let allocator = MTKMeshBufferAllocator(device: Renderer.device)
         let meshDescriptor = MDLVertexDescriptor.defaultLayout
         let asset = MDLAsset(
             url: assetURL,
@@ -32,7 +32,7 @@ class Model: Transformable {
                 forTextureCoordinateAttributeNamed: MDLVertexAttributeTextureCoordinate,
                 tangentAttributeNamed: MDLVertexAttributeTangent,
                 bitangentAttributeNamed: MDLVertexAttributeBitangent)
-            mtkMeshes.append(try! MTKMesh(mesh: mdlMesh, device: device))
+            mtkMeshes.append(try! MTKMesh(mesh: mdlMesh, device: Renderer.device))
         }
         meshes = zip(mdlMeshes, mtkMeshes).map {
             Mesh(mdlMesh: $0.0, mtkMesh: $0.1)

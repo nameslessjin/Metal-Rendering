@@ -3,6 +3,17 @@ import MetalKit
 enum TextureController {
     static var textures: [String: MTLTexture] = [:]
     
+    static func texture(filename: String) -> MTLTexture? {
+        if let texture = textures[filename] {
+            return texture
+        }
+        let texture = try? loadTexture(filename: filename)
+        if (texture != nil) {
+            textures[filename] = texture
+        }
+        return texture
+    }
+    
     static func loadTexture(filename: String) throws -> MTLTexture? {
         
         let textureLoader = MTKTextureLoader(device: Renderer.device) // create texture loader using MTKTextureloader
@@ -28,16 +39,6 @@ enum TextureController {
         return texture
     }
     
-    static func texture(filename: String) -> MTLTexture? {
-        if let texture = textures[filename] {
-            return texture
-        }
-        let texture = try? loadTexture(filename: filename)
-        if (texture != nil) {
-            textures[filename] = texture
-        }
-        return texture
-    }
     
     // load from USDZ file
     static func loadTexture(texture: MDLTexture) throws -> MTLTexture? {

@@ -33,8 +33,7 @@ struct ForwardRenderPass: RenderPass {
         renderEncoder.setDepthStencilState(depthStencilState)
         renderEncoder.setRenderPipelineState(pipelineState)
         
-        var lights = scene.lighting.lights
-        renderEncoder.setFragmentBytes(&lights, length: MemoryLayout<Light>.stride * lights.count, index: LightBuffer.index)
+        renderEncoder.setFragmentBuffer(scene.lighting.lightsBuffer, offset: 0, index: LightBuffer.index)
         renderEncoder.setFragmentTexture(idTexture, index: IDTexure.index)
         renderEncoder.setFragmentTexture(shadowTexture, index: ShadowTexture.index)
         
@@ -51,10 +50,10 @@ struct ForwardRenderPass: RenderPass {
         }
         
         // Debugging sun position
-        var scene = scene
-        DebugModel.debugDrawModel(renderEncoder: renderEncoder, uniforms: uniforms, model: scene.sun, color: [0.9, 0.8, 0.2])
-        DebugLights.draw(lights: scene.lighting.lights, encoder: renderEncoder, uniforms: uniforms)
-        DebugCameraFrustum.draw(encoder: renderEncoder, scene: scene, uniforms: uniforms)
+//        var scene = scene
+//        DebugModel.debugDrawModel(renderEncoder: renderEncoder, uniforms: uniforms, model: scene.sun, color: [0.9, 0.8, 0.2])
+//        DebugLights.draw(lights: scene.lighting.lights, encoder: renderEncoder, uniforms: uniforms)
+//        DebugCameraFrustum.draw(encoder: renderEncoder, scene: scene, uniforms: uniforms)
         // end debugging
         renderEncoder.endEncoding()
     }

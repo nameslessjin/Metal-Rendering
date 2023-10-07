@@ -57,8 +57,9 @@ typedef enum {
     RoughnessTexture = 2,
     MetallicTexture = 3,
     AOTexture = 4,
+    ShadowTexture = 5,
+    PositionTexture = 6,
     IDTexure = 11,
-    ShadowTexture = 15
 } TextureIndices;
 
 typedef enum {
@@ -89,5 +90,11 @@ typedef struct {
     float ambientOcclusion;
     float shininess;
 } Material;
+
+typedef enum {
+    RenderTargetAlbedo = 1,
+    RenderTargetNormal = 2,
+    RenderTargetPosition = 3
+} RenderTargetIndices;
 
 #endif /* Common_h */

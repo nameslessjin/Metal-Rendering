@@ -16,10 +16,10 @@ struct GameScene {
         createModel(name: "treefir.obj")
     }()
     lazy var ground: Model = {
-        Model(device: Renderer.device, name: "large_plane.obj", objectId: 0)
+        Model(name: "large_plane.obj", objectId: 0)
     }()
     lazy var sun: Model = {
-        Model(device: Renderer.device, name: "sun_sphere.obj")
+        Model(name: "sun_sphere.obj")
     }()
     
 //    lazy var gizmo: Model = {
@@ -58,7 +58,7 @@ struct GameScene {
         treefir3.position = [ 1.5, 0, -0.5]
         
         camera.transform = defaultView
-        camera.far = 8
+        camera.far = 20
         // ArcballCaera
         camera.distance = 4.0
         camera.target = [0, 1, 0]
@@ -73,7 +73,7 @@ struct GameScene {
     }
     
     func createModel(name: String) -> Model {
-        let model = Model(device: Renderer.device, name: name, objectId: Self.objectId)
+        let model = Model(name: name, objectId: Self.objectId)
         Self.objectId += 1
         return model
     }
@@ -131,10 +131,10 @@ struct GameScene {
         if isPaused {return}
         
         // rotate sun light around the scene
-        let rotationMatrix = float4x4(rotation: [0, deltaTime * 0.4, 0])
-        let position = lighting.lights[0].position
-        lighting.lights[0].position = (rotationMatrix * float4(position.x, position.y, position.z, 1)).xyz
-        sun.position = lighting.lights[0].position
+//        let rotationMatrix = float4x4(rotation: [0, deltaTime * 0.4, 0])
+//        let position = lighting.lights[0].position
+//        lighting.lights[0].position = (rotationMatrix * float4(position.x, position.y, position.z, 1)).xyz
+//        sun.position = lighting.lights[0].position
         
         calculateGizmo()
     }

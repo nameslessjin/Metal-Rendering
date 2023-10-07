@@ -26,10 +26,17 @@ vertex VertexOut vertex_main(const VertexIn in [[stage_in]], constant Uniforms &
     return out;
 }
 
-fragment float4 fragment_main(VertexOut in [[stage_in]], constant Params &params [[buffer(ParamsBuffer)]], constant Light *lights [[buffer(LightBuffer)]], constant Material &_material [[buffer(MaterialBuffer)]], texture2d<float> baseColorTexture [[texture(BaseColor)]], texture2d<float> normalTexture [[texture(NormalTexture)]]) {
+fragment float4 fragment_main(
+                              VertexOut in [[stage_in]], constant Params &params [[buffer(ParamsBuffer)]],
+                              constant Light *lights [[buffer(LightBuffer)]],
+                              constant Material &_material [[buffer(MaterialBuffer)]],
+                              texture2d<float> baseColorTexture [[texture(BaseColor)]],
+                              texture2d<float> normalTexture [[texture(NormalTexture)]],
+                              texture2d<uint> idTexture [[texture(IDTexure)]],
+                              depth2d<float> shadowTexture [[texture(ShadowTexture)]])
+{
     
     Material material = _material;
-    
     constexpr sampler textureSampler(filter::linear, address::repeat, mip_filter::linear, max_anisotropy(8));
     
     if (!is_null_texture(baseColorTexture)) {
@@ -43,8 +50,10 @@ fragment float4 fragment_main(VertexOut in [[stage_in]], constant Params &params
         normal = normal * 2 - 1;
         normal = float3x3(in.worldTangent, in.worldBitangent, in.worldNormal) * normal;
     }
+    
     normal = normalize(normal);
     
     float3 color = phongLighting(normal, in.worldPosition, params, lights, material);
+    color *= calculateShadow(in.shadowPosition, shadowTexture);
     return float4(color, 1);
 }

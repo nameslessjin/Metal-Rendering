@@ -15,6 +15,12 @@
 		4A8339EF2ACFE1210047A660 /* DebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8339EE2ACFE1210047A660 /* DebugModel.swift */; };
 		4A8339F12ACFE7320047A660 /* ShadowRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8339F02ACFE7320047A660 /* ShadowRenderPass.swift */; };
 		4A8339F32ACFED220047A660 /* Shadow.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4A8339F22ACFED220047A660 /* Shadow.metal */; };
+		4A833A9F2AD1144F0047A660 /* GBufferRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A833A9E2AD1144F0047A660 /* GBufferRenderPass.swift */; };
+		4A833AA12AD117450047A660 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A833AA02AD117450047A660 /* RadioButton.swift */; };
+		4A833AA42AD11AFE0047A660 /* icosphere.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 4A833AA22AD11AFE0047A660 /* icosphere.mtl */; };
+		4A833AA52AD11AFE0047A660 /* icosphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 4A833AA32AD11AFE0047A660 /* icosphere.obj */; };
+		4A833AA72AD12F890047A660 /* Deferred.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4A833AA62AD12F890047A660 /* Deferred.metal */; };
+		4A833AA92AD1350B0047A660 /* LightingRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A833AA82AD1350B0047A660 /* LightingRenderPass.swift */; };
 		4AA675AA2ACE4DAA009510E1 /* Metal_RenderingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA675A92ACE4DAA009510E1 /* Metal_RenderingApp.swift */; };
 		4AA675AE2ACE4DAB009510E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA675AD2ACE4DAB009510E1 /* Assets.xcassets */; };
 		4AA675B22ACE4DAB009510E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA675B12ACE4DAB009510E1 /* Preview Assets.xcassets */; };
@@ -83,6 +89,12 @@
 		4A8339EE2ACFE1210047A660 /* DebugModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugModel.swift; sourceTree = "<group>"; };
 		4A8339F02ACFE7320047A660 /* ShadowRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowRenderPass.swift; sourceTree = "<group>"; };
 		4A8339F22ACFED220047A660 /* Shadow.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shadow.metal; sourceTree = "<group>"; };
+		4A833A9E2AD1144F0047A660 /* GBufferRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBufferRenderPass.swift; sourceTree = "<group>"; };
+		4A833AA02AD117450047A660 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		4A833AA22AD11AFE0047A660 /* icosphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icosphere.mtl; sourceTree = "<group>"; };
+		4A833AA32AD11AFE0047A660 /* icosphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icosphere.obj; sourceTree = "<group>"; };
+		4A833AA62AD12F890047A660 /* Deferred.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Deferred.metal; sourceTree = "<group>"; };
+		4A833AA82AD1350B0047A660 /* LightingRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingRenderPass.swift; sourceTree = "<group>"; };
 		4AA675A62ACE4DAA009510E1 /* Metal-Rendering.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Metal-Rendering.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AA675A92ACE4DAA009510E1 /* Metal_RenderingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metal_RenderingApp.swift; sourceTree = "<group>"; };
 		4AA675AD2ACE4DAB009510E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -324,6 +336,7 @@
 				4AA676412ACE66F0009510E1 /* Vertex.h */,
 				4AA676492ACEC25C009510E1 /* ObjectId.metal */,
 				4A8339F22ACFED220047A660 /* Shadow.metal */,
+				4A833AA62AD12F890047A660 /* Deferred.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -355,6 +368,7 @@
 				4AA675F92ACE4DFA009510E1 /* Options.swift */,
 				4AA675FA2ACE4DFA009510E1 /* MetalView.swift */,
 				4AA675FB2ACE4DFA009510E1 /* ContentView.swift */,
+				4A833AA02AD117450047A660 /* RadioButton.swift */,
 			);
 			path = "SwiftUI Views";
 			sourceTree = "<group>";
@@ -362,6 +376,8 @@
 		4AA6762F2ACE5C43009510E1 /* 12 */ = {
 			isa = PBXGroup;
 			children = (
+				4A833AA22AD11AFE0047A660 /* icosphere.mtl */,
+				4A833AA32AD11AFE0047A660 /* icosphere.obj */,
 				4AA676302ACE5C43009510E1 /* large_plane.mtl */,
 				4A8339E42ACFBB2B0047A660 /* sun_sphere.obj */,
 				4AA676312ACE5C43009510E1 /* treefir.mtl */,
@@ -382,6 +398,8 @@
 				4AA676452ACEA48F009510E1 /* RenderPass.swift */,
 				4AA676472ACEB410009510E1 /* ObjectIdRenderPass.swift */,
 				4A8339F02ACFE7320047A660 /* ShadowRenderPass.swift */,
+				4A833A9E2AD1144F0047A660 /* GBufferRenderPass.swift */,
+				4A833AA82AD1350B0047A660 /* LightingRenderPass.swift */,
 			);
 			path = RenderPasses;
 			sourceTree = "<group>";
@@ -454,6 +472,7 @@
 				4AA6763B2ACE5C44009510E1 /* large_plane.obj in Resources */,
 				4AA676112ACE4DFA009510E1 /* sphere.mtl in Resources */,
 				4AA6760A2ACE4DFA009510E1 /* cottage1.mtl in Resources */,
+				4A833AA42AD11AFE0047A660 /* icosphere.mtl in Resources */,
 				4AA676392ACE5C44009510E1 /* treefir.obj in Resources */,
 				4AA676062ACE4DFA009510E1 /* fourareen2K_albedo.jpg in Resources */,
 				4AA6760D2ACE4DFA009510E1 /* cube.obj in Resources */,
@@ -461,6 +480,7 @@
 				4AA676102ACE4DFA009510E1 /* sphere.obj in Resources */,
 				4AA675B22ACE4DAB009510E1 /* Preview Assets.xcassets in Resources */,
 				4AA676012ACE4DFA009510E1 /* helmet-roughness.png in Resources */,
+				4A833AA52AD11AFE0047A660 /* icosphere.obj in Resources */,
 				4AA675FF2ACE4DFA009510E1 /* helmet-metallic.png in Resources */,
 				4AA676082ACE4DFA009510E1 /* fourareen.mtl in Resources */,
 				4AA6760C2ACE4DFA009510E1 /* cottage2.obj in Resources */,
@@ -493,6 +513,7 @@
 				4AA6761E2ACE4DFA009510E1 /* Renderer.swift in Sources */,
 				4AA676272ACE4DFA009510E1 /* Mesh.swift in Sources */,
 				4AA6761B2ACE4DFA009510E1 /* GameScene.swift in Sources */,
+				4A833AA72AD12F890047A660 /* Deferred.metal in Sources */,
 				4AA676252ACE4DFA009510E1 /* TextureController.swift in Sources */,
 				4AA675FD2ACE4DFA009510E1 /* InputController.swift in Sources */,
 				4AA6762D2ACE4DFA009510E1 /* MetalView.swift in Sources */,
@@ -503,14 +524,17 @@
 				4AA6762B2ACE4DFA009510E1 /* VertexDescriptor.swift in Sources */,
 				4AA676282ACE4DFA009510E1 /* Model.swift in Sources */,
 				4AA6764A2ACEC25C009510E1 /* ObjectId.metal in Sources */,
+				4A833A9F2AD1144F0047A660 /* GBufferRenderPass.swift in Sources */,
 				4AA676462ACEA48F009510E1 /* RenderPass.swift in Sources */,
 				4A8339EB2ACFCFEC0047A660 /* ShadowCamera.swift in Sources */,
+				4A833AA92AD1350B0047A660 /* LightingRenderPass.swift in Sources */,
 				4AA6762A2ACE4DFA009510E1 /* Submesh.swift in Sources */,
 				4AA6762C2ACE4DFA009510E1 /* Options.swift in Sources */,
 				4AA6761A2ACE4DFA009510E1 /* GameController.swift in Sources */,
 				4AA676242ACE4DFA009510E1 /* Lighting.metal in Sources */,
 				4AA6762E2ACE4DFA009510E1 /* ContentView.swift in Sources */,
 				4AA675FC2ACE4DFA009510E1 /* Movement.swift in Sources */,
+				4A833AA12AD117450047A660 /* RadioButton.swift in Sources */,
 				4AA676202ACE4DFA009510E1 /* MathLib.swift in Sources */,
 				4AA6761D2ACE4DFA009510E1 /* SceneLighting.swift in Sources */,
 				4A8339F12ACFE7320047A660 /* ShadowRenderPass.swift in Sources */,
