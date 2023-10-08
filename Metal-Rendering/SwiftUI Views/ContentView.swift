@@ -11,14 +11,19 @@ struct ContentView: View {
     @ObservedObject var options = Options()
     @State var chcked: Int = 1
     var body: some View {
-        VStack(alignment: .leading) {
+        let tiledSupported = options.tiledSupported ? "Tiled Deferred" : "Tiled Deferred not Supported!"
+        return VStack(alignment: .leading) {
             ZStack {
                 VStack {
                     MetalView(options: options)
                         .border(Color.black, width: 2)
-                    RadioButton(label: "Rendering", options: ["Deferred", "Forward"]) {
+                    RadioButton(label: "Rendering", options: [tiledSupported, "Deferred", "Forward"]) {
                         checked in
-                        options.renderChoice = checked == 0 ? .deferred : .forward
+                        options.renderChoice = RenderChoice(rawValue: checked) ?? .forward
+                        if !options.tiledSupported && options.renderChoice == .tiledDeferred {
+                            print("WARNING: TBDR features not supported")
+                            options.renderChoice = .forward
+                        }
                     }
                 }
             }

@@ -21,6 +21,7 @@
 		4A833AA52AD11AFE0047A660 /* icosphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 4A833AA32AD11AFE0047A660 /* icosphere.obj */; };
 		4A833AA72AD12F890047A660 /* Deferred.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4A833AA62AD12F890047A660 /* Deferred.metal */; };
 		4A833AA92AD1350B0047A660 /* LightingRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A833AA82AD1350B0047A660 /* LightingRenderPass.swift */; };
+		4A833B612AD1F2670047A660 /* TiledDeferredRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A833B602AD1F2670047A660 /* TiledDeferredRenderPass.swift */; };
 		4AA675AA2ACE4DAA009510E1 /* Metal_RenderingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA675A92ACE4DAA009510E1 /* Metal_RenderingApp.swift */; };
 		4AA675AE2ACE4DAB009510E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA675AD2ACE4DAB009510E1 /* Assets.xcassets */; };
 		4AA675B22ACE4DAB009510E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA675B12ACE4DAB009510E1 /* Preview Assets.xcassets */; };
@@ -95,6 +96,7 @@
 		4A833AA32AD11AFE0047A660 /* icosphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icosphere.obj; sourceTree = "<group>"; };
 		4A833AA62AD12F890047A660 /* Deferred.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Deferred.metal; sourceTree = "<group>"; };
 		4A833AA82AD1350B0047A660 /* LightingRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingRenderPass.swift; sourceTree = "<group>"; };
+		4A833B602AD1F2670047A660 /* TiledDeferredRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiledDeferredRenderPass.swift; sourceTree = "<group>"; };
 		4AA675A62ACE4DAA009510E1 /* Metal-Rendering.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Metal-Rendering.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AA675A92ACE4DAA009510E1 /* Metal_RenderingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metal_RenderingApp.swift; sourceTree = "<group>"; };
 		4AA675AD2ACE4DAB009510E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -328,12 +330,12 @@
 		4AA675E92ACE4DF9009510E1 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				4AA675EA2ACE4DFA009510E1 /* Shaders.metal */,
 				4AA675EB2ACE4DFA009510E1 /* Common.h */,
-				4AA675EC2ACE4DFA009510E1 /* PBR.metal */,
 				4AA675ED2ACE4DFA009510E1 /* Lighting.h */,
-				4AA675EE2ACE4DFA009510E1 /* Lighting.metal */,
 				4AA676412ACE66F0009510E1 /* Vertex.h */,
+				4AA675EA2ACE4DFA009510E1 /* Shaders.metal */,
+				4AA675EC2ACE4DFA009510E1 /* PBR.metal */,
+				4AA675EE2ACE4DFA009510E1 /* Lighting.metal */,
 				4AA676492ACEC25C009510E1 /* ObjectId.metal */,
 				4A8339F22ACFED220047A660 /* Shadow.metal */,
 				4A833AA62AD12F890047A660 /* Deferred.metal */,
@@ -400,6 +402,7 @@
 				4A8339F02ACFE7320047A660 /* ShadowRenderPass.swift */,
 				4A833A9E2AD1144F0047A660 /* GBufferRenderPass.swift */,
 				4A833AA82AD1350B0047A660 /* LightingRenderPass.swift */,
+				4A833B602AD1F2670047A660 /* TiledDeferredRenderPass.swift */,
 			);
 			path = RenderPasses;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				4AA6763E2ACE5C92009510E1 /* ForwardRenderPass.swift in Sources */,
 				4A8339ED2ACFE0960047A660 /* DebugCameraFrustum.metal in Sources */,
 				4AA675AA2ACE4DAA009510E1 /* Metal_RenderingApp.swift in Sources */,
+				4A833B612AD1F2670047A660 /* TiledDeferredRenderPass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

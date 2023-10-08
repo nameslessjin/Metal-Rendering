@@ -17,6 +17,7 @@ struct LightingRenderPass: RenderPass {
     weak var albedoTexture: MTLTexture?
     weak var normalTexture: MTLTexture?
     weak var positionTexture: MTLTexture?
+    weak var stencilTexture: MTLTexture?
     
     init(view: MTKView) {
         sunLightPSO = PipelineStates.createSunLightPSO(colorPixelFormat: view.colorPixelFormat)
@@ -29,15 +30,29 @@ struct LightingRenderPass: RenderPass {
     static func buildDepthStencilState() -> MTLDepthStencilState? {
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.isDepthWriteEnabled = false
+        let frontFaceStencil = MTLStencilDescriptor()
+        frontFaceStencil.stencilCompareFunction = .notEqual
+        frontFaceStencil.stencilFailureOperation = .keep
+        frontFaceStencil.depthFailureOperation = .keep
+        frontFaceStencil.depthStencilPassOperation = .keep
+        descriptor.frontFaceStencil = frontFaceStencil
         return Renderer.device.makeDepthStencilState(descriptor: descriptor)
     }
     
     
     func draw(commandBuffer: MTLCommandBuffer, scene: GameScene, uniforms: Uniforms, params: Params) {
+        
+        // set stencilAttachment to load so that the LightingRenderPass can use  the stencil texture for stencil testing
+        descriptor?.stencilAttachment.texture = stencilTexture
+        descriptor?.depthAttachment.texture = stencilTexture
+        descriptor?.stencilAttachment.loadAction = .load
+        descriptor?.depthAttachment.loadAction = .dontCare
+        
         // accumulate output from all light types when running the lighting pass
         // each type needs a different fragment function so multiple pipeline states
         guard let descriptor = descriptor,
               let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor) else { return }
+        
         
         renderEncoder.label = label
         renderEncoder.setDepthStencilState(depthStencilState)

@@ -89,7 +89,7 @@ struct SceneLighting {
         sunlights = [sunlight, ambientLight]
         sunBuffer = Self.createBuffer(lights: sunlights)
         lights = sunlights
-        pointLights = Self.createPointLights(count: 200, min: [-3, 0.1, -3], max: [3, 0.3, 3])
+        pointLights = Self.createPointLights(count: 40, min: [-6, 0.1, -6], max: [6, 0.3, 6])
         pointBuffer = Self.createBuffer(lights: pointLights)
         lights += pointLights
         lightsBuffer = Self.createBuffer(lights: lights)

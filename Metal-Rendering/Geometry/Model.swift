@@ -48,6 +48,7 @@ extension Model {
         uniforms vertex: Uniforms,
         params fragment: Params
     ) {
+        encoder.pushDebugGroup(name)
         var uniforms = vertex
         uniforms.modelMatrix = transform.modelMatrix
         uniforms.normalMatrix = uniforms.modelMatrix.upperLeft.inverse.transpose
@@ -81,5 +82,6 @@ extension Model {
                 encoder.drawIndexedPrimitives(type: .triangle, indexCount: submesh.indexCount, indexType: submesh.indexType, indexBuffer: submesh.indexBuffer, indexBufferOffset: submesh.indexBufferOffset)
             }
         }
+        encoder.popDebugGroup()
     }
 }
