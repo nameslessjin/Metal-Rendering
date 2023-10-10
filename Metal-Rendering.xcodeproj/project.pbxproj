@@ -24,6 +24,7 @@
 		4A833B612AD1F2670047A660 /* TiledDeferredRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A833B602AD1F2670047A660 /* TiledDeferredRenderPass.swift */; };
 		4A833C1D2AD54FDA0047A660 /* Warrior.obj in Resources */ = {isa = PBXBuildFile; fileRef = 4A833C1B2AD54FDA0047A660 /* Warrior.obj */; };
 		4A833C1E2AD54FDA0047A660 /* Warrior.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 4A833C1C2AD54FDA0047A660 /* Warrior.mtl */; };
+		4A833C252AD560620047A660 /* ConvertMesh.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4A833C242AD560620047A660 /* ConvertMesh.metal */; };
 		4AA675AA2ACE4DAA009510E1 /* Metal_RenderingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA675A92ACE4DAA009510E1 /* Metal_RenderingApp.swift */; };
 		4AA675AE2ACE4DAB009510E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA675AD2ACE4DAB009510E1 /* Assets.xcassets */; };
 		4AA675B22ACE4DAB009510E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AA675B12ACE4DAB009510E1 /* Preview Assets.xcassets */; };
@@ -101,6 +102,7 @@
 		4A833B602AD1F2670047A660 /* TiledDeferredRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiledDeferredRenderPass.swift; sourceTree = "<group>"; };
 		4A833C1B2AD54FDA0047A660 /* Warrior.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Warrior.obj; sourceTree = "<group>"; };
 		4A833C1C2AD54FDA0047A660 /* Warrior.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Warrior.mtl; sourceTree = "<group>"; };
+		4A833C242AD560620047A660 /* ConvertMesh.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ConvertMesh.metal; sourceTree = "<group>"; };
 		4AA675A62ACE4DAA009510E1 /* Metal-Rendering.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Metal-Rendering.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AA675A92ACE4DAA009510E1 /* Metal_RenderingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metal_RenderingApp.swift; sourceTree = "<group>"; };
 		4AA675AD2ACE4DAB009510E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				4AA676492ACEC25C009510E1 /* ObjectId.metal */,
 				4A8339F22ACFED220047A660 /* Shadow.metal */,
 				4A833AA62AD12F890047A660 /* Deferred.metal */,
+				4A833C242AD560620047A660 /* ConvertMesh.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				4A8339EB2ACFCFEC0047A660 /* ShadowCamera.swift in Sources */,
 				4A833AA92AD1350B0047A660 /* LightingRenderPass.swift in Sources */,
 				4AA6762A2ACE4DFA009510E1 /* Submesh.swift in Sources */,
+				4A833C252AD560620047A660 /* ConvertMesh.metal in Sources */,
 				4AA6762C2ACE4DFA009510E1 /* Options.swift in Sources */,
 				4AA6761A2ACE4DFA009510E1 /* GameController.swift in Sources */,
 				4AA676242ACE4DFA009510E1 /* Lighting.metal in Sources */,

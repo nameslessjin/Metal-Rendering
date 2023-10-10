@@ -58,11 +58,11 @@ struct GameScene {
     
     init() {
         
-        models = [ground, treefir1, treefir2, treefir3, train]
-        treefir1.position = [-1, 0, 2.5]
-        treefir2.position = [-3, 0, -2]
-        treefir3.position = [ 1.5, 0, -0.5]
-//        models = [warrior]
+//        models = [ground, treefir1, treefir2, treefir3, train]
+//        treefir1.position = [-1, 0, 2.5]
+//        treefir2.position = [-3, 0, -2]
+//        treefir3.position = [ 1.5, 0, -0.5]
+        models = [warrior]
         
         camera.transform = defaultView
         camera.far = 15
@@ -78,7 +78,8 @@ struct GameScene {
 //        camera.position = [0, 2, 0]
 //        camera.rotation.x = .pi / 2
         
-        convertMesh(warrior)
+        //convertMesh(warrior)
+        warrior.convertMesh()
     }
     
     func createModel(name: String) -> Model {
