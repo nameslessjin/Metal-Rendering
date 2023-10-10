@@ -97,4 +97,9 @@ typedef enum {
     RenderTargetPosition = 3
 } RenderTargetIndices;
 
+struct VertexLayout {
+    vector_float3 position;
+    vector_float3 normal;
+};
+
 #endif /* Common_h */

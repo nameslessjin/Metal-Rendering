@@ -33,6 +33,10 @@ struct ForwardRenderPass: RenderPass {
         renderEncoder.setDepthStencilState(depthStencilState)
         renderEncoder.setRenderPipelineState(pipelineState)
         
+        // inveerting z will flip the winding order of vertices
+        renderEncoder.setFrontFacing(.counterClockwise)
+        renderEncoder.setCullMode(.back)
+        
         renderEncoder.setFragmentBuffer(scene.lighting.lightsBuffer, offset: 0, index: LightBuffer.index)
         renderEncoder.setFragmentTexture(idTexture, index: IDTexure.index)
         renderEncoder.setFragmentTexture(shadowTexture, index: ShadowTexture.index)

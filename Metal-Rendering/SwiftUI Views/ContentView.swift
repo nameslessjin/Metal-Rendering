@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var options = Options()
-    @State var chcked: Int = 1
+    @State var checked: Int = 1
     var body: some View {
         let tiledSupported = options.tiledSupported ? "Tiled Deferred" : "Tiled Deferred not Supported!"
         return VStack(alignment: .leading) {
