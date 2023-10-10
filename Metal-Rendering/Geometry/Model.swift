@@ -84,4 +84,46 @@ extension Model {
         }
         encoder.popDebugGroup()
     }
+    
+    func convertMesh() {
+        guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
+              let computeEncoder = commandBuffer.makeComputeCommandEncoder() else { return }
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
+        let pipelineState: MTLComputePipelineState // requires fewer state changes on the GPU so no need a descriptor
+        do {
+            guard let kernelFunction = Renderer.library.makeFunction(name: "convert_mesh") else {
+                fatalError("Failed to create kernel function")
+            }
+            
+            pipelineState = try Renderer.device.makeComputePipelineState(function: kernelFunction)
+        } catch { fatalError(error.localizedDescription) }
+        computeEncoder.setComputePipelineState(pipelineState)
+        
+        // create a buffer to hold the total number of vertices
+        let totalBuffer = Renderer.device.makeBuffer(length: MemoryLayout<Int>.stride, options: [])
+        let vertexTotal = totalBuffer?.contents().bindMemory(to: Int.self, capacity: 1)
+        vertexTotal?.pointee = 0
+        computeEncoder.setBuffer(totalBuffer, offset: 0, index: 1)
+        
+        for mesh in meshes {
+            let vertexBuffer = mesh.vertexBuffers[VertexBuffer.index]
+            computeEncoder.setBuffer(vertexBuffer, offset: 0, index: 0)
+            let vertexCount = vertexBuffer.length / MemoryLayout<VertexLayout>.stride
+            
+            // the model vertices are a one-dimensional array, we only set up width
+            let threadsPerGroup = MTLSize(width: pipelineState.threadExecutionWidth, height: 1, depth: 1)
+            let threadsPerGrid = MTLSize(width: vertexCount, height: 1, depth: 1)
+            computeEncoder.dispatchThreads(threadsPerGrid, threadsPerThreadgroup: threadsPerGroup)
+            computeEncoder.endEncoding()
+        }
+        
+        // the command buffer can execute a closure after its GPU operations have finished
+        commandBuffer.addCompletedHandler{ _ in
+                print("GPU conversion time:", CFAbsoluteTimeGetCurrent() - startTime)
+            print("Total Vertices:", vertexTotal?.pointee ?? -1)
+        }
+        commandBuffer.commit()
+        
+    }
 }

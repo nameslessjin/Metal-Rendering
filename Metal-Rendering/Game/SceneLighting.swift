@@ -15,7 +15,28 @@ struct SceneLighting {
     let sunlight: Light = {
         var light = Self.buildDefaultLight()
         light.position = [3, 3, -2]
+        light.color = float3(repeating: 0.8)
+        return light
+    }()
+    
+    let backLight: Light = {
+        var light = Self.buildDefaultLight()
+        light.position = [0, 3, 2]
         light.color = float3(repeating: 1.0)
+        return light
+    }()
+    
+    let leftFillLight: Light = {
+        var light = Self.buildDefaultLight()
+        light.position = [3, -2, 0]
+        light.color = float3(repeating: 0.3)
+        return light
+    }();
+    
+    let rightFillLight: Light = {
+        var light = Self.buildDefaultLight()
+        light.position = [-2, -1, 1]
+        light.color = float3(repeating: 0.1)
         return light
     }()
     
@@ -28,7 +49,7 @@ struct SceneLighting {
     
     let ambientLight: Light = {
         var light = Self.buildDefaultLight()
-        light.color = float3(repeating: 0.1)
+        light.color = float3(repeating: 0.3)
         light.type = Ambient
         return light
     }()
@@ -89,7 +110,7 @@ struct SceneLighting {
         sunlights = [sunlight, ambientLight]
         sunBuffer = Self.createBuffer(lights: sunlights)
         lights = sunlights
-        pointLights = Self.createPointLights(count: 40, min: [-6, 0.1, -6], max: [6, 0.3, 6])
+        pointLights = Self.createPointLights(count: 1, min: [-6, 0.1, -6], max: [6, 0.3, 6])
         pointBuffer = Self.createBuffer(lights: pointLights)
         lights += pointLights
         lightsBuffer = Self.createBuffer(lights: lights)

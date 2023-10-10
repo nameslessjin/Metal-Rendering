@@ -3,6 +3,10 @@ import MetalKit
 struct GameScene {
     static var objectId: UInt32 = 1;
     
+    lazy var warrior: Model = {
+        createModel(name: "Warrior.obj")
+    }()
+    
     lazy var train: Model = {
         createModel(name: "train.obj")
     }()
@@ -37,6 +41,8 @@ struct GameScene {
         Transform(
             position: [3.2 , 3.1, 1.0],
             rotation: [-0.6, 10.7, 0.0]
+//            position: [1.4 , 1.9, 2.6],
+//            rotation: [-0.14, 9.9, 0.0]
         )
     }
     
@@ -52,16 +58,17 @@ struct GameScene {
     
     init() {
         
-        models = [ground, treefir1, treefir2, treefir3, train]
-        treefir1.position = [-1, 0, 2.5]
-        treefir2.position = [-3, 0, -2]
-        treefir3.position = [ 1.5, 0, -0.5]
+//        models = [ground, treefir1, treefir2, treefir3, train]
+//        treefir1.position = [-1, 0, 2.5]
+//        treefir2.position = [-3, 0, -2]
+//        treefir3.position = [ 1.5, 0, -0.5]
+        models = [warrior]
         
         camera.transform = defaultView
-        camera.far = 20
+        camera.far = 15
         // ArcballCaera
-        camera.distance = 4.0
-        camera.target = [0, 1, 0]
+        camera.distance = 2.7
+        camera.target = [0, 1.5, 0]
         // digital emily
 //        camera.distance = 30
 //        camera.rotation = .zero
@@ -70,6 +77,9 @@ struct GameScene {
         // OrhographicsCamera
 //        camera.position = [0, 2, 0]
 //        camera.rotation.x = .pi / 2
+        
+        //convertMesh(warrior)
+        warrior.convertMesh()
     }
     
     func createModel(name: String) -> Model {
@@ -137,6 +147,21 @@ struct GameScene {
 //        sun.position = lighting.lights[0].position
         
         calculateGizmo()
+    }
+    
+    mutating func convertMesh(_ model: Model) {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        for mesh in model.meshes {
+            let vertexBuffer = mesh.vertexBuffers[VertexBuffer.index]
+            let count = vertexBuffer.length / MemoryLayout<VertexLayout>.stride // number of vertices
+            // contents() gives MTLBuffer, we bind the contents to pointer, making it an UnsafeMutablePointer
+            var pointer = vertexBuffer.contents().bindMemory(to: VertexLayout.self, capacity: count)
+            for _ in 0..<count {
+                pointer.pointee.position.z = -pointer.pointee.position.z // invert z
+                pointer = pointer.advanced(by: 1)
+            }
+        }
+        print("CPU Time:", CFAbsoluteTimeGetCurrent() - startTime)
     }
     
     mutating func calculateGizmo() {
